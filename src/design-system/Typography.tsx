@@ -9,39 +9,40 @@ import {
   ColorProps,
   typography,
   TypographyProps,
+  layout,
+  LayoutProps,
 } from 'styled-system';
 
-interface TypographyComponent
+interface TypographyComponentDto
   extends SpaceProps,
     ColorProps,
+    LayoutProps,
     TypographyProps {
   children?: React.ReactNode;
   as?: string;
 }
 
 export const Text: FC<any> = styled.p`
-  font-family: OpenSans;
   ${fluid(space)}
   ${fluid(typography)}
   ${fluid(color)}
+  ${fluid(layout)}
 `;
 
-export const Header1: FC<TypographyComponent> = styled(Text)`
+export const Header1: FC<TypographyComponentDto> = styled(Text)`
   font-size: 40px;
   line-height: 44px;
-  font-family: OpenSans-bold;
 `;
 Header1.defaultProps = { as: 'h1' };
 
-export const Title: FC<TypographyComponent> = styled(Text)`
+export const Title: FC<TypographyComponentDto> = styled(Text)`
   font-size: 22px;
   line-height: 22px;
-  font-family: OpenSans-bold;
   margin-top: 8px;
 `;
 Title.defaultProps = { as: 'h2' };
 
-export const Text1: FC<TypographyComponent> = styled(Text)`
+export const Text1: FC<TypographyComponentDto> = styled(Text)`
   font-size: 16px;
   line-height: 18px;
 `;
