@@ -82,6 +82,7 @@ interface ButtonDto {
   type: 'primary' | 'secondary';
   isLoading?: boolean;
   buttonType?: 'button' | 'submit' | 'reset';
+  testId?: string;
 }
 
 const Button = ({children, type, isLoading, buttonType, onClick, ...rest}: ButtonComponentDto & ButtonDto) => {   
@@ -91,7 +92,7 @@ const Button = ({children, type, isLoading, buttonType, onClick, ...rest}: Butto
     ...rest,
     onClick: !isLoading ? onClick : undefined,
     type: buttonType,
-  }), [type])
+  }), [rest, buttonType, isLoading, onClick])
 
   return (
     <Btn 

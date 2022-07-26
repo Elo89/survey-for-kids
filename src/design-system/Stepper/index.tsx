@@ -1,8 +1,7 @@
 import { Flex } from '../Styled';
 import { Text1 } from '../Typography';
-import 'swiper/css';
 import Line from './Line';
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 
 interface PropType {
   surveyConf: any,

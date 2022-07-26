@@ -10,10 +10,16 @@ function Header() {
       justifyContent="center"
       bg="#00D7FF"
       height="150px"
+      data-testid={'header-title'}
     >
-      <img src={`${iconPath}logo.png`} width="100px" style={{
-        margin: "20px"
-      }}/>
+      <img
+        src={`${iconPath}logo.png`}
+        width="100px"
+        alt="Logo"
+        style={{
+          margin: "20px"
+        }}
+      />
       <Header1 color="primary" fontWeight={700} mr={4}>Survey for Kids</Header1>
     </Flex>
   );

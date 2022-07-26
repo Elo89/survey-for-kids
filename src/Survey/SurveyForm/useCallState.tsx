@@ -29,7 +29,7 @@ function useCallState({ survey }: PropType) {
     // I send it to the next slide showing the error for 1 sec
     await timeout(1000);
     swiper?.slideNext?.();
-  }, [swiper])
+  }, [swiper, survey.results])
 
   const bgColor = useMemo(() => {
     if(state === 'edit')

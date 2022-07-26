@@ -1,12 +1,11 @@
 import { css, Global, ThemeProvider } from '@emotion/react'
 import { theme } from './theme/theme';
 import Survey from './Survey';
-import surveyConf from './surveyConf';
 import emotionReset from 'emotion-reset';
 import Header from './design-system/Header';
 import { Flex } from './design-system/Styled';
 
-function App() {
+function App({ surveyConf }: { surveyConf: any}) {
   return (
     <ThemeProvider theme={theme}>
       <Global 

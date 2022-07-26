@@ -1,6 +1,5 @@
 import { Div } from '../Styled';
 
-import 'swiper/css';
 interface PropType {
   indexActive: number,
   index: number,

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, {ElementType, FC} from 'react';
+import React, {ElementType} from 'react';
 // @ts-ignore
 import fluid from "fluid-system";
 import {
@@ -33,6 +33,7 @@ interface StyledComponentDto
   PositionProps,
     BackgroundProps {
   children?: React.ReactNode;
+  testId?: string;
   as?: ElementType<any>
 }
 
