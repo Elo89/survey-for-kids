@@ -1,23 +1,79 @@
-import React from 'react';
-import { Div } from '../design-system/Styled';
-import { Header1, Text1 } from '../design-system/Typography';
+import { useCallback, useState } from 'react';
+import { Swiper, SwiperSlide} from 'swiper/react';
+import { Flex } from '../design-system/Styled';
+import SurveyForm from './SurveyForm';
+
+import 'swiper/css';
+import useIsMobile from '../hooks/useIsMobile';
+import Stepper from '../design-system/Stepper';
+import FeedbackScreen from './FeedbackScreen';
 
 interface PropType {
   surveyConf: any,
 }
 
-function Survey({ surveyConf }: PropType) {  
+function Survey({ surveyConf }: PropType) {
+  const [active, setActive] = useState<number>(0);
+  const isMobile = useIsMobile();
+
+  const onActiveIndexChange = useCallback((swiper: any) => {              
+    setActive(swiper.realIndex)
+  }, []);
+ 
   return (
-    <>
-      {surveyConf?.map((survey: any, index: string) => 
-        <Div key={`survey-${index}`} background={['blue', 'red', 'green']}>
-            <Header1>{survey.question}</Header1>
-            {survey?.options?.map((opt: any, index: string) =>
-              <Text1 key={`opt-${index}`}>{opt.text}</Text1>
+    <Flex 
+      height={["calc(100vh - 230px)", "calc(100vh - 150px)"]}
+      flexDirection={["column", 'row']}
+    >
+      <Flex
+        width={['100%', '80px']}
+        minHeight={["80px", '100%']}
+        bg={'#FBCAFF'}
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Stepper surveyConf={surveyConf} indexActive={active} />
+      </Flex>
+      <Flex
+        flex={1}
+      >
+        <Flex 
+          position="relative"
+          width={["100%", "calc(100vw - 80px)"]}
+          height="100%"
+          maxHeight="100%"
+          flexWrap="wrap"
+          flex={1}
+          >
+          <Swiper
+            spaceBetween={50}
+            slidesPerView={1}
+            noSwiping
+            noSwipingClass={'swiper-slide'}
+            onActiveIndexChange={onActiveIndexChange}
+            direction={isMobile ? 'horizontal': 'vertical'}
+          >
+            {surveyConf?.map((survey: any, index: number) => 
+              <SwiperSlide key={`survey-${index}`}>
+                <SurveyForm survey={survey} />
+              </SwiperSlide>
             )}
-        </Div>
-      )}
-    </>
+            <SwiperSlide>
+              <Flex 
+                background={'#ffca00'}
+                alignItems={'center'}
+                justifyContent={'center'}
+                flexDirection={'column'}
+                p={4}
+                height={'100%'}
+              >
+                <FeedbackScreen message="Survey completata" />
+              </Flex>
+            </SwiperSlide>
+          </Swiper>
+        </Flex>
+      </Flex>
+    </Flex>
   );
 }
 
