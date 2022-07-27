@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import surveyConf from './surveyConf';
+import surveyConf from './mockApi/surveyConf';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

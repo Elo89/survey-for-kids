@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Swiper, SwiperSlide} from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { Flex } from '../design-system/Styled';
 import SurveyForm from './SurveyForm';
 
@@ -28,15 +28,13 @@ function Survey({ surveyConf }: PropType) {
       <Flex
         width={['100%', '80px']}
         minHeight={["80px", '100%']}
-        bg={'#FBCAFF'}
+        bg="#FBCAFF"
         alignItems="center"
         justifyContent="center"
       >
         <Stepper surveyConf={surveyConf} indexActive={active} />
       </Flex>
-      <Flex
-        flex={1}
-      >
+      <Flex flex={1}>
         <Flex 
           position="relative"
           width={["100%", "calc(100vw - 80px)"]}
@@ -49,7 +47,7 @@ function Survey({ surveyConf }: PropType) {
             spaceBetween={50}
             slidesPerView={1}
             noSwiping
-            noSwipingClass={'swiper-slide'}
+            noSwipingClass="swiper-slide"
             onActiveIndexChange={onActiveIndexChange}
             direction={isMobile ? 'horizontal': 'vertical'}
           >
@@ -60,14 +58,17 @@ function Survey({ surveyConf }: PropType) {
             )}
             <SwiperSlide>
               <Flex 
-                background={'#ffca00'}
-                alignItems={'center'}
-                justifyContent={'center'}
-                flexDirection={'column'}
+                background="#ffca00"
+                alignItems="center"
+                justifyContent="center"
+                flexDirection="column"
                 p={4}
-                height={'100%'}
+                height="100%"
               >
-                <FeedbackScreen message="Survey completata" />
+                <FeedbackScreen 
+                  message="Survey completata"
+                  testId="complete-survey"
+                />
               </Flex>
             </SwiperSlide>
           </Swiper>
