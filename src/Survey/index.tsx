@@ -67,7 +67,7 @@ function Survey({ surveyConf }: PropType) {
               >
                 <FeedbackScreen 
                   message="Survey completata"
-                  testId="complete-survey"
+                  data-testid="complete-survey"
                 />
               </Flex>
             </SwiperSlide>

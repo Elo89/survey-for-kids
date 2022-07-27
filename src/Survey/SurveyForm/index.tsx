@@ -40,9 +40,11 @@ function SurveyForm({ survey }: PropType) {
               register={register}
               type={survey.type}
               options={survey.options}
+              data-testid={`field-${survey.id}`}
             />
 
             <Button
+              data-testid={`next-questions-${survey.id}`}
               buttonType="submit"
               type='primary'
               mt={4}
@@ -54,10 +56,16 @@ function SurveyForm({ survey }: PropType) {
         </>
       }
       {state === 'success' && 
-        <FeedbackScreen message="La risposta è esatta" />
+        <FeedbackScreen 
+          message="La risposta è esatta"
+          data-testid={`success-questions-${survey.id}`}
+        />
       }
       {state === 'error' && 
-        <FeedbackScreen message="La risposta è errata" />
+        <FeedbackScreen
+          message="La risposta è errata"
+          data-testid={`error-questions-${survey.id}`}
+        />
       }
     </Flex>
   );

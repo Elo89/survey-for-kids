@@ -1,0 +1,18 @@
+[
+  {
+    "id": "question1",
+    "results": [4]
+  },
+  {
+    "id": "question2",
+    "results": ["LEVRAM"]
+  },
+  {
+    "id": "question3",
+    "results": [true]
+  },
+  {
+    "id": "question4",
+    "results": [true]
+  }
+]

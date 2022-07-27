@@ -3,7 +3,6 @@ import { Header1 } from '../../design-system/Typography';
 
 interface PropType {
   message: string,
-  testId?: string,
 }
 
 function FeedbackScreen({ message, ...props }: PropType) {
