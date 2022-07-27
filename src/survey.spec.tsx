@@ -3,15 +3,6 @@ import {render, fireEvent, waitFor, screen, act, cleanup } from '@testing-librar
 import '@testing-library/jest-dom'
 import Survey from './App'
 
-const setInputText = ({
-  utils,
-  index,
-  value,
-}: any) => {
-  const input = utils.getByTestId(`field-${surveyConf[index].id}`)
-  fireEvent.change(input, {target: { value }})
-}
-
 const clickNextStep = async (currentIndex: number) => {
   fireEvent.click(screen.getByTestId(`next-questions-${surveyConf[currentIndex].id}`));
 }
@@ -25,29 +16,20 @@ const checkIsLoading = async (currentIndex: number, utils: any, timeout = 500) =
 }
 
 const stepRadioExecute = async ({ utils, index, valueSelector } : any) => {
-  act(() => {
+  await act(() => {
     fireEvent.click(utils.getByTestId(`radio-${valueSelector}`));
   })
-  act(() => {
+  await act(() => {
     clickNextStep(index);
   })
 }
 
 const stepInputExecute = async ({utils, index, value} : any) => {
-  act(() => {
-    setInputText({
-      utils,
-      index,
-      value
-    })
-  })
-  act(() => {
+  await act(() => {
+    const input = utils.getByTestId(`field-${surveyConf[index].id}`)
+    fireEvent.change(input, {target: { value }})
     clickNextStep(index);
   })
-}
-
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 // @ts-ignore
@@ -84,6 +66,7 @@ describe("[Survey] - Components integration", () => {
 
   describe('Survey Components', () => {
     it('TEST - correct answers', async () => {
+      const promise = Promise.resolve()
       const component = render(<Survey surveyConf={surveyConf} />)
       const {rerender, ...utils} = component;
 
@@ -117,6 +100,8 @@ describe("[Survey] - Components integration", () => {
         value: 'LEVRAM',
       })
 
+      await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2))
+
       await checkIsLoading(1, utils);
 
       await waitFor(() => { 
@@ -131,6 +116,8 @@ describe("[Survey] - Components integration", () => {
         index: 2,
         valueSelector: 'true-si'
       })
+
+      await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(3))
       
       await checkIsLoading(2, utils);
 
@@ -147,6 +134,8 @@ describe("[Survey] - Components integration", () => {
         valueSelector: 'true-Ragnatele'
       })
       
+      await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(4))
+
       await checkIsLoading(3, utils);
 
       await waitFor(() => { 
@@ -154,6 +143,7 @@ describe("[Survey] - Components integration", () => {
       }, {
         timeout: 1500,
       })
+      await act(async() => await promise)
     });
 
 
