@@ -47,4 +47,4 @@ export const Text1: FC<TypographyComponentDto> = styled(Text)`
   line-height: 18px;
 `;
 
-Title.defaultProps = { as: 'p' };
+Text1.defaultProps = { as: 'p' };
