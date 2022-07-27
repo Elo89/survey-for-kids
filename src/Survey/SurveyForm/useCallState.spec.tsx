@@ -1,26 +1,7 @@
 import { cleanup, act, waitFor, renderHook } from "@testing-library/react";
 import useCallState from "./useCallState";
 import surveyConf from "../../surveyConf";
-
-// @ts-ignore
-const mock = [
-  {
-    "id": "question1",
-    "results": [4]
-  },
-  {
-    "id": "question2",
-    "results": ["LEVRAM"]
-  },
-  {
-    "id": "question3",
-    "results": [true]
-  },
-  {
-    "id": "question4",
-    "results": [true]
-  }
-];
+import mock from '../../../public/assets/mockApi/results.json'
 
 describe("[Survey] - useCallState", () => {
 	beforeEach(() => {
@@ -39,7 +20,6 @@ describe("[Survey] - useCallState", () => {
       .spyOn(global, 'fetch')
       // @ts-ignore
       .mockImplementation(() => Promise.resolve({ json: () => Promise.resolve(mock) }))
-  
 		expect(result.current.isLoading).toBe(false)
 		expect(result.current.state).toBe('edit')
 		expect(result.current.bgColor).toBe('white')

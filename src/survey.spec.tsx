@@ -2,6 +2,7 @@ import surveyConf from './surveyConf';
 import {render, fireEvent, waitFor, screen, act, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Survey from './App'
+import mock from '../public/assets/mockApi/results.json'
 
 const clickNextStep = async (currentIndex: number) => {
   fireEvent.click(screen.getByTestId(`next-questions-${surveyConf[currentIndex].id}`));
@@ -18,8 +19,6 @@ const checkIsLoading = async (currentIndex: number, utils: any, timeout = 500) =
 const stepRadioExecute = async ({ utils, index, valueSelector } : any) => {
   await act(() => {
     fireEvent.click(utils.getByTestId(`radio-${valueSelector}`));
-  })
-  await act(() => {
     clickNextStep(index);
   })
 }
@@ -31,27 +30,6 @@ const stepInputExecute = async ({utils, index, value} : any) => {
     clickNextStep(index);
   })
 }
-
-// @ts-ignore
-const mock = [
-  {
-    "id": "question1",
-    "results": [4]
-  },
-  {
-    "id": "question2",
-    "results": ["LEVRAM"]
-  },
-  {
-    "id": "question3",
-    "results": [true]
-  },
-  {
-    "id": "question4",
-    "results": [true]
-  }
-];
-
 
 describe("[Survey] - Components integration", () => {
 	beforeEach(() => {
